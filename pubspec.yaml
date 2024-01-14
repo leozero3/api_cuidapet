@@ -7,10 +7,12 @@ environment:
   sdk: ^3.2.2
 
 dependencies:
+  get_it: ^7.6.6
   args: ^2.4.2
   shelf: ^1.4.1
   shelf_router: ^1.1.4
   dotenv: ^4.2.0
+  mysql1: ^0.20.0
 
 dev_dependencies:
   http: ^1.1.2
