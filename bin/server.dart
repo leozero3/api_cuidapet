@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:api_cuidapet/application/config/application_config.dart';
 import 'package:api_cuidapet/application/middlewares/cors/cors_middlewares.dart';
+import 'package:api_cuidapet/application/middlewares/defaultContentType/default_content_type.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -22,6 +23,8 @@ void main(List<String> args) async {
   // Configure a pipeline that logs requests.
   final handler = Pipeline()
       .addMiddleware(CorsMiddlewares().handler)
+      .addMiddleware(
+          DefaultContentType('application/json;charset=utf-8').handler)
       .addMiddleware(logRequests())
       .addHandler(router);
 

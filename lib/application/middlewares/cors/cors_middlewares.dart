@@ -14,15 +14,12 @@ class CorsMiddlewares extends Middlewares {
 
   @override
   Future<Response> execute(Request request) async {
-    print('Iniciando CrossDomain');
     if (request.method == 'OPTIONS') {
-      print('Retornando Headers do CrossDomain');
       return Response(HttpStatus.ok, headers: headers);
     }
-    print('executando funcao CrossDomain');
 
     final response = await innerHandler(request);
-    print('Respondendo para o cliente  CrossDomain');
+
     return response.change(headers: headers);
   }
 }
