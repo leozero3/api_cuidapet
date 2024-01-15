@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:api_cuidapet/application/config/application_config.dart';
 import 'package:api_cuidapet/application/middlewares/cors/cors_middlewares.dart';
 import 'package:api_cuidapet/application/middlewares/defaultContentType/default_content_type.dart';
+import 'package:api_cuidapet/application/middlewares/security/security_middleware.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -13,7 +15,8 @@ void main(List<String> args) async {
   // Application Config
   final router = Router();
   final appConfig = ApplicationConfig();
-  appConfig.loadConfigApplication(router);
+  await appConfig.loadConfigApplication(router);
+  final getIt = GetIt.I;
 
   // Configure routes.
   router.get('/hello', (Request request) {
@@ -25,6 +28,7 @@ void main(List<String> args) async {
       .addMiddleware(CorsMiddlewares().handler)
       .addMiddleware(
           DefaultContentType('application/json;charset=utf-8').handler)
+      .addMiddleware(SecurityMiddleware(getIt.get()).handler)
       .addMiddleware(logRequests())
       .addHandler(router);
 
