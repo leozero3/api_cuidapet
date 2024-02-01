@@ -11,7 +11,7 @@ Router _$AuthControllerRouter(AuthController service) {
   router.add(
     'GET',
     r'/',
-    service.find,
+    service.saveUser,
   );
   return router;
 }

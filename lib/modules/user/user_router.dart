@@ -9,7 +9,7 @@ class UserRouter implements IRouter {
     final authController = GetIt.I.get<AuthController>();
     router.mount(
       '/auth/',
-      AuthController().router,
+      authController.router,
     );
   }
 }
